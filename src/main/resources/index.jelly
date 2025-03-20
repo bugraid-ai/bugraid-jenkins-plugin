@@ -1,0 +1,1 @@
+<?jelly escape-by-default='true'?><div>A Jenkins plugin that sends build notifications to BugRaid, allowing you to track and manage build issues directly in your BugRaid dashboard.</div>

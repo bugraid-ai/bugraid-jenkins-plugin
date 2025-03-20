@@ -1,0 +1,15 @@
+BugRaid Jenkins Plugin
+Copyright 2024 BugRaid.AI
+
+This product includes software developed by BugRaid.AI (https://bugraid.ai).
+
+This product includes software developed by The Apache Software Foundation (http://www.apache.org/).
+
+This product includes software developed by Jenkins (https://www.jenkins.io/).
+
+Portions of this software were originally based on:
+- Jenkins Core API
+- Jenkins Credentials Plugin
+- Jenkins HTTP Client Library
+
+For a complete list of contributors and third-party libraries, please see the LICENSE file. 

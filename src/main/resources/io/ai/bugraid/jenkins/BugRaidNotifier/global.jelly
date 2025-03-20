@@ -1,0 +1,30 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:c="/lib/credentials">
+    <f:section title="BugRaid Configuration">
+        <f:entry title="Default API Key" field="defaultApiKey">
+            <f:textbox />
+        </f:entry>
+        
+        <f:entry title="Default App Key" field="defaultAppKey">
+            <f:textbox />
+        </f:entry>
+        
+        <f:entry title="Default Credentials" field="defaultCredentialsId">
+            <c:select expression="${descriptor.getCredentialsList()}"/>
+        </f:entry>
+        
+        <f:entry title="Default Notification Settings">
+            <div>
+                <f:checkbox title="Notify on Build Start by Default" field="defaultNotifyOnStart" checked="${instance.defaultNotifyOnStart}"/>
+            </div>
+            <div>
+                <f:checkbox title="Notify on Build Success by Default" field="defaultNotifyOnSuccess" checked="${instance.defaultNotifyOnSuccess}"/>
+            </div>
+            <div>
+                <f:checkbox title="Notify on Build Failure by Default" field="defaultNotifyOnFailure" checked="${instance.defaultNotifyOnFailure}"/>
+            </div>
+        </f:entry>
+        
+        <f:validateButton title="Test Connection" progress="Testing..." method="testConnection" with="defaultApiKey,defaultAppKey,defaultCredentialsId"/>
+    </f:section>
+</j:jelly> 
