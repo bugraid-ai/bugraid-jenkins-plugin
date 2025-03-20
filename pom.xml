@@ -1,92 +1,110 @@
-<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.53</version>
+        <version>4.85</version>  <!-- Updated per hosting requirement -->
         <relativePath />
     </parent>
-    <name>BugRaid Notifier</name>
-    <artifactId>BugRaid-jenkins</artifactId>
-    <description>Notifies BugRaid of Jenkins builds</description>
-    <url>https://github.com/jenkinsci/BugRaid-plugin</url>
+
+    <groupId>io.jenkins.plugins</groupId>  <!-- Corrected groupId -->
+    <artifactId>bugraid-jenkins</artifactId>  <!-- Corrected artifactId -->
     <version>1.4.1-SNAPSHOT</version>
     <packaging>hpi</packaging>
+
+    <name>BugRaid Jenkins Notification Plugin</name>
+    <description>A Jenkins plugin to send build notifications to BugRaid.AI</description>
+    <url>https://github.com/jenkinsci/bugraid-jenkins</url>
+
     <scm>
-        <connection>scm:git:ssh://github.com/jenkinsci/BugRaid-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/BugRaid-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/BugRaid-plugin</url>
+        <connection>scm:git:git@github.com:jenkinsci/bugraid-jenkins.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/bugraid-jenkins.git</developerConnection>
+        <url>https://github.com/jenkinsci/bugraid-jenkins</url>
         <tag>HEAD</tag>
     </scm>
+
     <licenses>
         <license>
-            <name>apache v2</name>
+            <name>Apache License, Version 2.0</name>
             <url>https://opensource.org/licenses/Apache-2.0</url>
         </license>
     </licenses>
+
     <developers>
         <developer>
-            <id>juliogereca</id>
-            <name>Julio Guereca</name>
-            <organization>BugRaid</organization>
-            <organizationUrl>https://www.BugRaid.ai</organizationUrl>
-        </developer>
-        <developer>
-            <id>robstemen</id>
-            <name>Rob Stemen</name>
-            <organization>BugRaid</organization>
-            <organizationUrl>https://www.BugRaid.ai</organizationUrl>
+            <id>manojchandrabss</id>
+            <name>Manoj Bhamidipati</name>
+            <organization>BugRaid.AI</organization>
+            <organizationUrl>https://www.bugraid.ai</organizationUrl>
         </developer>
     </developers>
+
     <distributionManagement>
         <repository>
             <id>maven.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/releases</url>
         </repository>
     </distributionManagement>
+
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/public/</url>
         </repository>
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>repo.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/public/</url>
         </pluginRepository>
     </pluginRepositories>
+
     <dependencies>
+        <!-- Replaced httpclient with Jenkins API plugin -->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.14</version>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>apache-httpcomponents-client-4-api</artifactId>
+            <version>4.5.14-20240124.133547-1</version>
         </dependency>
+
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>git</artifactId>
             <version>5.0.0</version>
-            <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>command-launcher</artifactId>
             <version>1.6</version>
         </dependency>
+
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>junit</artifactId>
             <version>1166.va_436e268e972</version>
         </dependency>
+
         <dependency>
             <groupId>org.jenkins-ci.plugins.workflow</groupId>
             <artifactId>workflow-support</artifactId>
             <version>839.v35e2736cfd5c</version>
         </dependency>
     </dependencies>
+
     <properties>
-        <jenkins.version>2.387</jenkins.version>
+        <jenkins.version>2.440.3</jenkins.version>  <!-- Updated per hosting requirement -->
+        <java.level>11</java.level>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -95,22 +113,21 @@
                 <configuration>
                     <fixTags>param,return,throws,link</fixTags>
                     <author>false</author>
-                    <!-- <detectLinks>true</detectLinks> -->
                     <force>true</force>
                     <failOnError>false</failOnError>
                     <links>
                         <link>https://docs.oracle.com/javase/11/docs/api/</link>
                         <link>https://download.eclipse.org/jgit/site/${jgit.version}/org.eclipse.jgit/apidocs/</link>
                     </links>
-                    <!-- <additionalOptions>-html5</additionalOptions> -->
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jenkins-ci.tools</groupId>
                 <artifactId>maven-hpi-plugin</artifactId>
-                <version>3.38</version>
+                <version>3.50</version>  <!-- Updated plugin version -->
                 <extensions>true</extensions>
             </plugin>
         </plugins>
     </build>
+
 </project>
