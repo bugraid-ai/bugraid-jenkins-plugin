@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -8,23 +8,23 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.85</version>  <!-- Updated per hosting requirement -->
-        <relativePath />
+        <version>4.85</version>
+        <relativePath/>
     </parent>
 
-    <groupId>io.jenkins.plugins</groupId>  <!-- Corrected groupId -->
-    <artifactId>bugraid-jenkins</artifactId>  <!-- Corrected artifactId -->
+    <groupId>io.jenkins.plugins</groupId>
+    <artifactId>bugraid-notifier</artifactId>
     <version>1.4.1-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
-    <name>BugRaid Jenkins Notification Plugin</name>
-    <description>A Jenkins plugin to send build notifications to BugRaid.AI</description>
-    <url>https://github.com/jenkinsci/bugraid-jenkins</url>
+    <name>BugRaid Notification Plugin</name>
+    <description>A plugin to send build notifications to BugRaid.AI</description>
+    <url>https://github.com/jenkinsci/bugraid-notifier</url>
 
     <scm>
-        <connection>scm:git:git@github.com:jenkinsci/bugraid-jenkins.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/bugraid-jenkins.git</developerConnection>
-        <url>https://github.com/jenkinsci/bugraid-jenkins</url>
+        <connection>scm:git:git@github.com:jenkinsci/bugraid-notifier.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/bugraid-notifier.git</developerConnection>
+        <url>https://github.com/jenkinsci/bugraid-notifier</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -53,24 +53,50 @@
 
     <repositories>
         <repository>
-            <id>repo.jenkins-ci.org</id>
-            <url>https://repo.jenkins-ci.org/public/</url>
+            <id>jenkins-releases</id>
+            <url>https://repo.jenkins-ci.org/releases/</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
-            <id>repo.jenkins-ci.org</id>
-            <url>https://repo.jenkins-ci.org/public/</url>
+            <id>jenkins-releases</id>
+            <url>https://repo.jenkins-ci.org/releases/</url>
         </pluginRepository>
     </pluginRepositories>
 
+    <!-- ✅ Enforce versions to resolve conflicts -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>credentials</artifactId>
+                <version>1337.v60b_d7b_c7b_c9f</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>bouncycastle-api</artifactId>
+                <version>2.30.1.77-225.v26ea_c9455fd9</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>structs</artifactId>
+                <version>337.v1b_04ea_4df7c8</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-        <!-- Replaced httpclient with Jenkins API plugin -->
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>apache-httpcomponents-client-4-api</artifactId>
-            <version>4.5.14-20240124.133547-1</version>
+            <version>4.5.14-150.v7a_b_9d17134a_5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jenkins-ci.modules</groupId>
+            <artifactId>instance-identity</artifactId>
+            <version>201.vd2a_b_5a_468a_a_6</version>
         </dependency>
 
         <dependency>
@@ -96,10 +122,28 @@
             <artifactId>workflow-support</artifactId>
             <version>839.v35e2736cfd5c</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>ssh-credentials</artifactId>
+            <version>343.v884f71d78167</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>trilead-api</artifactId>
+            <version>2.142.v748523a_76693</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>credentials</artifactId>
+            <version>1337.v60b_d7b_c7b_c9f</version>
+        </dependency>
     </dependencies>
 
     <properties>
-        <jenkins.version>2.440.3</jenkins.version>  <!-- Updated per hosting requirement -->
+        <jenkins.version>2.440.3</jenkins.version>
         <java.level>11</java.level>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -121,13 +165,13 @@
                     </links>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.jenkins-ci.tools</groupId>
                 <artifactId>maven-hpi-plugin</artifactId>
-                <version>3.50</version>  <!-- Updated plugin version -->
+                <version>3.50</version>
                 <extensions>true</extensions>
             </plugin>
         </plugins>
     </build>
-
 </project>
